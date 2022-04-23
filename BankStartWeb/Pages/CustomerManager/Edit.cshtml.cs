@@ -4,17 +4,16 @@ using BankStartWeb.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
-namespace BankStartWeb.Pages.BankManager
+namespace BankStartWeb.Pages.CustomerManager
 {
     [BindProperties]
-    public class EditCustomerModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly INotyfService _notyf;
 
-        public EditCustomerModel(ApplicationDbContext context, INotyfService notyf)
+        public EditModel(ApplicationDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;
@@ -39,6 +38,7 @@ namespace BankStartWeb.Pages.BankManager
 
         public List<SelectListItem> AllCountries { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> AllCountriesCode { get; set; } = new List<SelectListItem>();
+
         public void OnGet(int customerId)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Id == customerId);

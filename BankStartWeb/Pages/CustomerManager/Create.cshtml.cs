@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BankStartWeb.Pages.BankManager
+namespace BankStartWeb.Pages.CustomerManager
 {
     [BindProperties]
-    public class NewModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly INotyfService _notyf;
 
-        public NewModel(ApplicationDbContext context, INotyfService notyf)
+        public CreateModel(ApplicationDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;
@@ -29,12 +29,12 @@ namespace BankStartWeb.Pages.BankManager
 
         public string CountryCode { get; set; }
         [MaxLength(20)] public string NationalId { get; set; }
-        
+
         [Range(0, 9999)] public int TelephoneCountryCode { get; set; }
         public string Telephone { get; set; }
-        
+
         [MaxLength(50)] public string EmailAddress { get; set; }
-        
+
         [DataType(DataType.Date)] public DateTime Birthday { get; set; }
 
         public List<SelectListItem> AllCountries { get; set; } = new List<SelectListItem>();
@@ -49,7 +49,7 @@ namespace BankStartWeb.Pages.BankManager
 
             AllCountriesCode.Add(new SelectListItem("SE", "Sweden"));
             AllCountriesCode.Add(new SelectListItem("NO", "Norway"));
-            AllCountriesCode.Add(new SelectListItem("FI", "Finland")); 
+            AllCountriesCode.Add(new SelectListItem("FI", "Finland"));
         }
         public void OnGet()
         {
@@ -86,7 +86,7 @@ namespace BankStartWeb.Pages.BankManager
                 return RedirectToPage("/Index");
             }
 
-            
+
             _notyf.Error("Fail to add customer, Please try again.");
 
             return Page();
@@ -95,3 +95,5 @@ namespace BankStartWeb.Pages.BankManager
         }
     }
 }
+
+

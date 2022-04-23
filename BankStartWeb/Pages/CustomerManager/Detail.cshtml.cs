@@ -1,16 +1,16 @@
+using System.ComponentModel.DataAnnotations;
 using BankStartWeb.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
-namespace BankStartWeb.Pages
+namespace BankStartWeb.Pages.CustomerManager
 {
-    public class CustomerInfoModel : PageModel
+    public class DetailModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerInfoModel(ApplicationDbContext context)
+        public DetailModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -25,13 +25,12 @@ namespace BankStartWeb.Pages
         [MaxLength(30)] public string Country { get; set; }
         [MaxLength(2)] public string CountryCode { get; set; }
         [MaxLength(20)] public string NationalId { get; set; }
-        [Range(0, 9999)]
-        public int TelephoneCountryCode { get; set; }
+        [Range(0, 9999)] public int TelephoneCountryCode { get; set; }
         public string Telephone { get; set; }
-        [MaxLength(50)]
-        public string EmailAddress { get; set; }
+        [MaxLength(50)] public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
         public List<Account> Accounts { get; set; }
+
         public decimal TotalBalance { get; set; }
         //public class AccountInfoViewModel
         //{
@@ -43,12 +42,12 @@ namespace BankStartWeb.Pages
 
         //}
         public void OnGet(int id)
-        {           
+        {
             var accountInfo = _context.Customers
                 .Include(c => c.Accounts)
                 .First(customer => customer.Id == id);
-                
-            
+
+
             Id = accountInfo.Id;
             Givenname = accountInfo.Givenname;
             Surname = accountInfo.Surname;
@@ -69,15 +68,6 @@ namespace BankStartWeb.Pages
             {
                 TotalBalance += account.Balance;
             }
-            //AccountInfo = accountInfo.Accounts
-            //.Select(account => new AccountInfoViewModel
-            //{
-            //    AccountType = account.AccountType,
-            //    Balance = account.Balance,
-            //})
-            //.ToList();
         }
     }
-
-   
 }

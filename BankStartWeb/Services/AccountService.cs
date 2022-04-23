@@ -35,7 +35,9 @@ namespace BankStartWeb.Services
             }
 
             account.Transactions.Add(transaction);
+
             _context.SaveChanges();
+
             return IAccountService.ErrorCode.ok;
         }
 

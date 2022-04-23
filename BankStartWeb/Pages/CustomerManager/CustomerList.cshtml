@@ -1,8 +1,7 @@
 ﻿@page
-@model BankStartWeb.Pages.BankManager.CustomersModel
+@model BankStartWeb.Pages.CustomerManager.CustomerListModel
 @{
 }
-
 
 <div class="container-fluid">
     <div class="row">
@@ -18,59 +17,59 @@
                         <thead>
                         <tr>
                             <th style="color: #ff5e5e">Id
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Id" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Id" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Id" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Id" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             <th style="color: #324cdd">First Name
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Givenname" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Givenname" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Givenname" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Givenname" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th >
                             <th style="color: #324cdd">Last Name
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Surname" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Surname" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Surname" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Surname" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             <th style="color: #324cdd">Country
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Country" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Country" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Country" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Country" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             <th style="color: #324cdd">City
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="City" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="City" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="City" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="City" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             <th style="color: #324cdd">National ID
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="NationalId" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="NationalId" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="NationalId" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="NationalId" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             <th style="color: #324cdd">Telephone
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Telephon" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Telephone" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Telephon" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Telephone" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
 
                             <th style="color: #324cdd">Email
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="EmailAddress" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="EmailAddress" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="EmailAddress" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="EmailAddress" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
 
                             <th style="color: #324cdd">Birthday
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Birthday" asp-route-order="asc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Birthday" asp-route-order="asc">
                                     <i class='bx bxs-up-arrow'></i> </a>
-                                <a asp-page="/BankManager/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="Birthday" asp-route-order="desc">
+                                <a asp-page="/CustomerManager/CustomerList" asp-route-searchWord="@Model.SearchWord" asp-route-col="Birthday" asp-route-order="desc">
                                     <i class='bx bxs-down-arrow'></i> </a>
                             </th>
                             
@@ -84,9 +83,9 @@
                         @foreach (var customer in Model.Customers)
                         {
                             <tr>
-                                <td  class="table-active"><a asp-route-id="@customer.Id" asp-page="/BankManager/CustomerInfo">@customer.Id</a></td>
-                                <td class="table-primary"><a asp-route-id="@customer.Id" asp-page="/BankManager/CustomerInfo">@customer.Givenname</a></td>
-                                <td class="table-success"><a asp-route-id="@customer.Id" asp-page="/BankManager/CustomerInfo">@customer.Surname</a></td>
+                                <td  class="table-active"><a asp-route-id="@customer.Id" asp-page="/CustomerManager/Detail">@customer.Id</a></td>
+                                <td class="table-primary"><a asp-route-id="@customer.Id" asp-page="/CustomerManager/Detail">@customer.Givenname</a></td>
+                                <td class="table-success"><a asp-route-id="@customer.Id" asp-page="/CustomerManager/Detail">@customer.Surname</a></td>
                                 <td class="table-info">@customer.Country</td>
                                 <td class="table-warning">@customer.City</td>
                                 <td class="table-danger">@customer.NationalId</td>
@@ -95,7 +94,7 @@
                                 <td class="table-warning">@customer.Birthday</td>
                                 
                                 <td style="color: #6610f2" >
-                                    <a asp-route-customerId="@customer.Id" asp-page="/BankManager/EditCustomer">
+                                    <a asp-route-customerId="@customer.Id" asp-page="/CustomerManager/Edit">
                                         <i class='bx bxs-edit'></i>
                                     </a>
                                 </td>
@@ -107,7 +106,7 @@
                             <td>
                                 @if (Model.PageNum > 1)
                                 {
-                                    <a asp-page="/BankManager/Customers" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pagenum="@(Model.PageNum - 1)">
+                                    <a asp-page="/CustomerManager/CustomerList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pagenum="@(Model.PageNum - 1)">
                                         <i class='bx bx-arrow-to-left btn-lg btn-facebook'></i>
                                     </a>
                                 }
@@ -116,7 +115,7 @@
                             <td>
                                 @if (Model.PageNum < Model.TotalPageCount)
                                 {
-                                    <a asp-page="/BankManager/Customers" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pagenum="@(Model.PageNum + 1)">
+                                    <a asp-page="/CustomerManager/CustomerList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pagenum="@(Model.PageNum + 1)">
                                         <i class='bx bx-arrow-to-right btn-lg btn-facebook'></i>
                                     </a>
                                 }
