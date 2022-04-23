@@ -84,7 +84,6 @@
                                 <th>Account type</th>
                                 <th>Balance</th>
                                 <th>Created</th>
-                                <th>Activity</th>
 
                             </tr>
                             </thead>
@@ -93,25 +92,29 @@
                             {
                                 <tr>
                                     <td style="color: #fd7e14">@account.AccountType</td>
-                                    <td style="color: #6fd96f">@account.Balance $</td>
+                                    <td style="color: #6fd96f">@account.Balance$</td>
                                     <td style="color: #11cdef">@account.Created</td>
                                     <td>
-                                        <div class="progress" style="height: 10px">
-                                            <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                            </div>
-                                        </div>
+                                        <button type="button" class="btn mb-1 btn-primary" >
+                                            <a style="color: white" asp-route-id="@Model.Id" asp-page="/AccountManager/TransactionList">Transactions</a>
+                                        </button>
                                     </td>
-                                    <td><span class="label gradient-8 btn-rounded">70%</span>
+                                    <td>
+                                        <button type="button" class="btn mb-1 btn-success" >
+                                            <a style="color: white" asp-route-id="@account.Id" asp-page="/AccountManager/Deposit">Deposit</a>
+                                        </button>
                                     </td>
-                                    <th><a asp-page="/AccountManager/AccountInfo" asp-route-id="@account.Id">
-                                        <i style="color: #ec0c38" class='bx bx-dots-horizontal-rounded btn-lg' ></i>
-                                    </a></th>
+                                    <td>
+                                        <button type="button" class="btn mb-1 btn-danger" >
+                                            <a style="color: white" asp-route-id="@account.Id" asp-page="/AccountManager/Withdrawal">Withdrawal</a>
+                                        </button>
+                                    </td>
                                 </tr>
                             }
                             <tr>
                                 <th>Total Balance</th>
                                 <td style="color: #2dce89">
-                                    @Model.TotalBalance $
+                                    @Model.TotalBalance$
                                 </td>
                             </tr>
                             </tbody>

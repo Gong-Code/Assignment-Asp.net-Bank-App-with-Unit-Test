@@ -1,0 +1,46 @@
+﻿@page
+@model BankStartWeb.Pages.AccountManager.TransactionListModel
+@{
+}
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <div>
+                    <h3 style="color:indigo ">@Model.AccountType</h3>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr style="color: cornflowerblue">
+                        <th>Type</th>
+                        <th>Operation</th>
+                        <th>New Balance</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.Type</td>
+                            <td>@transaction.Operation</td>
+                            <td>@transaction.NewBalance</td>
+                            <td>@transaction.Date</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <div>
+                    <h3 style="color: green">
+                        Current Balance: @Model.Balance$
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+

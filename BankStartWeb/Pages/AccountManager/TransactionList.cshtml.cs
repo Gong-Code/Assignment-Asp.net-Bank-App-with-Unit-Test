@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
-    public class AccountInfoModel : PageModel
+    public class TransactionListModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public AccountInfoModel(ApplicationDbContext context)
+        public TransactionListModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,7 +27,7 @@ namespace BankStartWeb.Pages.AccountManager
                 .First(c => c.Accounts.Any(a => a.Id == id));
 
             var account = _context.Accounts.First(a => a.Id == id);
-            
+
             Id = id;
             AccountType = account.AccountType;
             Created = account.Created;

@@ -1,5 +1,6 @@
 using AspNetCoreHero.ToastNotification;
 using BankStartWeb.Data;
+using BankStartWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
     options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Login");
 });
 builder.Services.AddTransient<DataInitializer>();
+builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 3;
