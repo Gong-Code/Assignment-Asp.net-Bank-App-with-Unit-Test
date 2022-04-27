@@ -13,7 +13,7 @@
             </div>
             
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table id="posts-table" class="table table-hover">
                     <thead>
                     <tr style="color: cornflowerblue">
                         <th>Type</th>
@@ -23,15 +23,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var transaction in Model.Transactions)
-                    {
-                        <tr>
-                            <td>@transaction.Type</td>
-                            <td>@transaction.Operation</td>
-                            <td>@transaction.NewBalance</td>
-                            <td>@transaction.Date</td>
-                        </tr>
-                    }
+                   
                     </tbody>
                 </table>
                 <div>
@@ -39,8 +31,53 @@
                         Current Balance: @Model.Balance$
                     </h3>
                 </div>
+                <a href="javascript: fetchMore();">See More</a>
             </div>
         </div>
     </div>
-    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+        pageNum = 1;
+
+        function fetchMore() {
+            fetch("TransactionList?handler=FetchMore&pageNum=" + pageNum + "&customerId=@Model.Id")
+                .then((response) => response.json())
+                .then((json) => {
+                        pageNum = pageNum + 1;
+                        json.items.forEach(tableElements);
+
+                        console.log(json);
+                    }
+                );
+        }
+
+        function tableElements(element) {
+            document.querySelector('#posts-table tbody').innerHTML +=
+            `<tr>
+                <td>${element.id}</td>
+                <td>${element.type}</td>
+                <td>${element.operation}</td>
+                <td>${element.date}</td>
+                <td>${element.amount}</td>
+                <td>${element.newBalance}</td>
+        
+                </tr>`;
+        }
+
+        document.addEventListener("DOMContentLoaded",
+            function() {
+                fetchMore();
+            });
+
+
+    </script>
+}
+
+
+
 

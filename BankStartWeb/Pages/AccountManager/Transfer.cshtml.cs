@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
-    [BindProperties]
     public class TransferModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -19,12 +18,11 @@ namespace BankStartWeb.Pages.AccountManager
             _accountService = accountService;
         }
 
-        public int AccountId { get; set; }
-        public int TransferId { get; set; }
+        [BindProperty] public int AccountId { get; set; }
+        [BindProperty] public int TransferId { get; set; }
         public int CustomerId { get; set; }
         public string Operation { get; set; }
-        public string Type { get; set; }
-        public decimal Amount { get; set; }
+        [BindProperty]public decimal Amount { get; set; }
         public Customer Customer { get; set; }
         public List<Account> Accounts { get; set; }
         

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
-    [BindProperties]
+    
     public class WithdrawalModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -22,8 +22,7 @@ namespace BankStartWeb.Pages.AccountManager
 
         public int AccountId { get; set; }
         public int CustomerId { get; set; }
-        public decimal Amount { get; set; }
-        public string Type { get; set; }
+        [BindProperty] public decimal Amount { get; set; }
         public string Operation { get; set; }
         public Account Account { get; set; }
         public Customer Customer { get; set; }
