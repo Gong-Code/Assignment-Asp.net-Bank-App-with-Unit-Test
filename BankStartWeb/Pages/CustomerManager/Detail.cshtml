@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
                     <div class="justify-content-center text-center text-purple style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
@@ -92,18 +92,23 @@
                                     <td style="color: #6fd96f">@account.Balance$</td>
                                     <td style="color: #11cdef">@account.Created</td>
                                     <td>
-                                        <button type="button" class="btn mb-1 btn-primary" >
-                                            <a style="color: white" asp-route-id="@Model.Id" asp-page="/AccountManager/TransactionList">Transactions</a>
-                                        </button>
-                                    </td>
-                                    <td>
                                         <button type="button" class="btn mb-1 btn-success" >
                                             <a style="color: white" asp-route-id="@account.Id" asp-page="/AccountManager/Deposit">Deposit</a>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn mb-1 btn-danger" >
-                                            <a style="color: white" asp-route-id="@account.Id" asp-page="/AccountManager/Withdrawal">Withdrawal</a>
+                                            <a style="color: white" asp-route-accountId="@account.Id" asp-page="/AccountManager/Withdrawal">Withdrawal</a>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn mb-1 btn-warning" >
+                                            <a style="color: white" asp-route-customerId="@account.Id" asp-page="/AccountManager/Transfer">Transfer</a>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn mb-1 btn-primary" >
+                                            <a style="color: white" asp-route-id="@Model.Id" asp-page="/AccountManager/TransactionList">See all Transactions</a>
                                         </button>
                                     </td>
                                 </tr>

@@ -41,10 +41,12 @@ namespace BankStartWeb.Services
             return IAccountService.ErrorCode.ok;
         }
 
-        public IAccountService.ErrorCode MakeWithdrawal(int accountId, decimal amount, string type)
+        public IAccountService.ErrorCode MakeWithdrawal(int accountId, decimal amount)
         {
-            var account = _context.Accounts.First(a => a.Id == accountId);
-
+            var account = _context.Accounts
+                .Include(a => a.Transactions)
+                .First(a => a.Id == accountId);
+            
             if (account.Balance < amount)
             {
                 return IAccountService.ErrorCode.BalanceIsToLow;
@@ -55,22 +57,77 @@ namespace BankStartWeb.Services
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
 
-            account.Balance -= amount;
-
-            var transaction = new Transaction();
+            if (amount > account.Balance)
             {
-                transaction.Type = type;
-                transaction.Operation = "Withdrawal";
-                transaction.Amount = amount;
-                transaction.Date = DateTime.UtcNow;
-                transaction.NewBalance = account.Balance;
+                return IAccountService.ErrorCode.InSufficientFunds;
             }
 
-            account.Transactions.Add(transaction);
+            account.Balance -= amount;
+
+            var transactions = new Transaction();
+            {
+                transactions.Type = "Credit";
+                transactions.Amount = amount;
+                transactions.Operation = "Withdrawal";
+                transactions.Date = DateTime.Now;
+                transactions.NewBalance = account.Balance;
+            }
+
+            account.Transactions.Add(transactions);
 
             _context.SaveChanges();
 
             return IAccountService.ErrorCode.ok;
+        }
+
+        public IAccountService.ErrorCode Transfer(int thisAccountId, int receiverAccountId, decimal amount)
+        {
+            if (amount < 0)
+            {
+                return IAccountService.ErrorCode.AmountIsNegative;
+            }
+
+            var senderAccount = _context.Accounts
+                .Include(s => s.Transactions)
+                .First(a => a.Id == thisAccountId);
+
+            var receiverAccount = _context.Accounts
+                .Include(s => s.Transactions)
+                .First(a => a.Id == receiverAccountId);
+
+            var sender = new Transaction();
+            {
+                sender.Amount = amount;
+                sender.Operation = "Transfer";
+                sender.Date = DateTime.Now;
+                sender.Type = "Credit";
+                sender.NewBalance = senderAccount.Balance - amount;
+            }
+
+            if (amount > senderAccount.Balance)
+            {
+                return IAccountService.ErrorCode.InSufficientFunds;
+            }
+
+            var receiver = new Transaction();
+            {
+                receiver.Amount = amount;
+                receiver.Operation = "Transfer";
+                receiver.Date = DateTime.Now;
+                receiver.Type = "Debit";
+                receiver.NewBalance = receiverAccount.Balance + amount;
+            }
+
+            senderAccount.Balance -= amount;
+            receiverAccount.Balance += amount;
+
+            senderAccount.Transactions.Add(sender);
+            receiverAccount.Transactions.Add(receiver);
+
+            _context.SaveChanges();
+
+            return IAccountService.ErrorCode.ok;
+
         }
     }
 }

@@ -1,12 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BankStartWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankStartWeb.Pages.CustomerManager
 {
+    [Authorize(Roles = "Admin, Cashier")]
     [BindProperties]
     public class CreateModel : PageModel
     {

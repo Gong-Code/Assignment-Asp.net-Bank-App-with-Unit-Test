@@ -1,0 +1,29 @@
+﻿@page
+@model BankStartWeb.Pages.AccountManager.TransferModel
+@{
+}
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-5 ">
+            <div class="bg-white p-5 rounded mt-5">
+                <h1>Transfer</h1>
+                <p>From account: @Model.AccountId</p>
+                <form method="post">
+                    
+                    <div class="form-group">
+                        <label class="d-flex" asp-for="TransferId">Account number</label>
+                        <input asp-for="TransferId" class="form-group"/>
+                        <span class="text-danger d-block" asp-validation-for="TransferId"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="d-flex" asp-for="Amount">Amount</label>
+                        <input asp-for="Amount" class="form-group"/>
+                        <span class="text-danger d-block" asp-validation-for="Amount"></span>
+                    </div>
+                    <button class="btn btn-primary btn-round" type="submit" asp-route-customerId="@Model.CustomerId"asp-route-accountId="@Model.AccountId">Transfer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

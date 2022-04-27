@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using BankStartWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.CustomerManager
 {
+    [Authorize(Roles = "Admin, Cashier")]
     public class DetailModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -14,7 +16,6 @@ namespace BankStartWeb.Pages.CustomerManager
         {
             _context = context;
         }
-        //public List<AccountInfoViewModel> AccountInfo { get; set; }
 
         public int Id { get; set; }
         [MaxLength(50)] public string Givenname { get; set; }
@@ -32,15 +33,7 @@ namespace BankStartWeb.Pages.CustomerManager
         public List<Account> Accounts { get; set; }
 
         public decimal TotalBalance { get; set; }
-        //public class AccountInfoViewModel
-        //{
-        //    [MaxLength(10)]
-        //    public string? AccountType { get; set; }
-
-        //    public DateTime Created { get; set; }
-        //    public decimal Balance { get; set; }
-
-        //}
+ 
         public void OnGet(int id)
         {
             var accountInfo = _context.Customers
@@ -64,6 +57,7 @@ namespace BankStartWeb.Pages.CustomerManager
             Accounts = accountInfo.Accounts;
 
             TotalBalance = 0;
+
             foreach (var account in Accounts)
             {
                 TotalBalance += account.Balance;
