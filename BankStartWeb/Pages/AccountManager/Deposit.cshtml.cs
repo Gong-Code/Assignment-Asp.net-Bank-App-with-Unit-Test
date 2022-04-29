@@ -3,48 +3,71 @@ using BankStartWeb.Data;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
     public class DepositModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        private readonly IAccountService _accountService;
 
+        private readonly IAccountService _accountService;
+       
         public DepositModel(ApplicationDbContext context, IAccountService accountService)
         {
             _context = context;
             _accountService = accountService;
         }
 
-        [Range(1, 5000)] 
-        public decimal Amount { get; set; }
-        public string Type { get; set; }
+        public int AccountId { get; set; }
+        public int CustomerId { get; set; }
+        [BindProperty] public decimal Amount { get; set; }
+        public string Operation { get; set; }
+        public Account Account { get; set; }
+        public Customer Customer { get; set; }
 
-        public void OnGet(int id)
+        public void OnGet(int accountId, int customerId)
         {
-            var account = _context.Accounts
-                .First(a => a.Id == id);
-
-            id = account.Id;
+            AccountId = accountId;
+            CustomerId = customerId;
         }
 
-        public IActionResult OnPost(int id, decimal amount)
+        public IActionResult OnPost(int accountId, int customerId)
         {
             if (ModelState.IsValid)
             {
-                var status = _accountService.MakeDeposit(id, amount);
+                Customer = _context.Customers
+                    .First(c => c.Id == customerId);
+
+                Account = _context.Accounts
+                    .Include(t => t.Transactions)
+                    .First(a => a.Id == accountId);
+
+                var status = _accountService.MakeDeposit(accountId, Amount);
+
+                if (status == IAccountService.ErrorCode.AmountIsNegative)
+                {
+                    ModelState.AddModelError(nameof(Amount),
+                        "Insufficient funds");
+
+                    return Page();
+                }
+
+                if (status == IAccountService.ErrorCode.BalanceIsToLow)
+                {
+                    ModelState.AddModelError(nameof(Amount),
+                        "Your current balance is to low.");
+
+                    return Page();
+                }
 
                 if (status == IAccountService.ErrorCode.ok)
                 {
-                    return RedirectToPage("TransactionList", new {Id = id}); // Set property Id to the current id.
+                    return RedirectToPage("/AccountManager/TransactionList", new { customerId });
                 }
-
-                ModelState.AddModelError("amount", "invalid amount");
             }
 
             return Page();
-
         }
     }
 }

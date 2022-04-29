@@ -3,7 +3,7 @@
 @{
 }
 
-<form method="post" class="table">
+@*<form method="post" class="table">
     <div class="form-group">
         <label asp-for="Amount">Amount</label>
         <input class="form-control" asp-for="Amount" value="0,0"/>
@@ -15,4 +15,25 @@
         <span class="field-validation-error" asp-validation-for="Type"></span>
     </div>
     <button type="submit" class="btn-solid-border">Deposit</button>
-</form>
+</form>*@
+
+<h1>Deposit</h1>
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-5 ">
+            <div class="bg-white p-5 rounded mt-5">
+                <h1>Deposit</h1>
+                <h4>Account number:@Model.AccountId</h4>
+                <form method="post">
+                    <div class="form-group">
+                        <label class="d-flex" asp-for="Amount">Amount</label>
+                        <input asp-for="Amount" class="form-group"/>
+                        <span class="d-block text-danger" asp-validation-for="Amount"></span>
+                    </div>
+                    <button class="btn btn-primary btn-round" type="submit" asp-route-customerId="@Model.CustomerId" asp-route-accountId="@Model.AccountId">Make a Deposit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

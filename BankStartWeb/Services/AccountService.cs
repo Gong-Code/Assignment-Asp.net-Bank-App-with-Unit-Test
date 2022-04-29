@@ -23,6 +23,11 @@ namespace BankStartWeb.Services
                 .Include(a => a.Transactions)
                 .First(a => a.Id == accountId);
 
+            if (account.Balance < amount)
+            {
+                return IAccountService.ErrorCode.BalanceIsToLow;
+            }
+
             account.Balance += amount;
 
             var transaction = new Transaction();

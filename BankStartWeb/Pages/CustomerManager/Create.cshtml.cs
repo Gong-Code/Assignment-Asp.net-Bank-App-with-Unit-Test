@@ -55,7 +55,6 @@ namespace BankStartWeb.Pages.CustomerManager
         }
         public void OnGet()
         {
-
             SetAllCountries();
         }
 
@@ -92,7 +91,6 @@ namespace BankStartWeb.Pages.CustomerManager
             _notyf.Error("Fail to add customer, Please try again.");
 
             return Page();
-
 
         }
     }
