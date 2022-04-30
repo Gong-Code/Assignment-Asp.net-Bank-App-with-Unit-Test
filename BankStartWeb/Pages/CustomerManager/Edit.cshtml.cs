@@ -90,7 +90,7 @@ namespace BankStartWeb.Pages.CustomerManager
 
                 _notyf.Success("Success!");
 
-                return RedirectToPage("/BankManager/Customers");
+                return RedirectToPage("/CustomerManager/CustomerList");
             }
 
             return Page();
