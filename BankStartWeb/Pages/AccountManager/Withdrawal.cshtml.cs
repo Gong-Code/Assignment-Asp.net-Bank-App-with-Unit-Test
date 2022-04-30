@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using BankStartWeb.Data;
 using BankStartWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
-    
+    [Authorize(Roles = "Admin, Cashier")]
     public class WithdrawalModel : PageModel
     {
         private readonly ApplicationDbContext _context;

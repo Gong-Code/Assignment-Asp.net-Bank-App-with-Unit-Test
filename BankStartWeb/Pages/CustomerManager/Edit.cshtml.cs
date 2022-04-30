@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankStartWeb.Pages.CustomerManager
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Cashier")]
     [BindProperties]
     public class EditModel : PageModel
     {
@@ -88,7 +88,7 @@ namespace BankStartWeb.Pages.CustomerManager
 
                 _context.SaveChanges();
 
-                _notyf.Success("Succes!");
+                _notyf.Success("Success!");
 
                 return RedirectToPage("/BankManager/Customers");
             }

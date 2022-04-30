@@ -1,0 +1,35 @@
+﻿@page
+@model BankStartWeb.Pages.AdminManager.CreateUserModel
+@{
+}
+
+<div class="card container pt-5 my-5">
+    <div class="card-header">
+        <h1>New User</h1>
+    </div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="UserName">UserName</label>
+            <input class="form-control" asp-for="UserName">
+            <span asp-validation-for="UserName" style="color: red" class="field-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input class="form-control" asp-for="Email">
+            <span asp-validation-for="Email" style="color: red" class="field-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input class="form-control" asp-for="Password">
+            <span asp-validation-for="Password" style="color: red"  class="field-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Roles"></label>
+            <select class="form-control" asp-for="Roles" asp-items="@Model.AllRoles">
+            </select>
+            <span asp-validation-for="Roles" style="color: red" class="field-validation-error"></span>
+        </div>
+        <button class="btn btn-primary" type="submit">Add user</button>
+    </form>
+</div>
+

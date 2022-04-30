@@ -1,5 +1,6 @@
 using BankStartWeb.Data;
 using BankStartWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.AccountManager
 {
+    [Authorize(Roles = "Admin, Cashier")]
     public class TransferModel : PageModel
     {
         private readonly ApplicationDbContext _context;
