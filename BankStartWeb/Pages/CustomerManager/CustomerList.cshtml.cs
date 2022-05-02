@@ -67,22 +67,22 @@ namespace BankStartWeb.Pages.CustomerManager
             TotalPageCount = pageResult.PageCount;
 
             Customers = pageResult.Results.Select(c => new CustomerViewModel
-                {
-                    Id = c.Id,
-                    Givenname = c.Givenname,
-                    Surname = c.Surname,
-                    Streetaddress = c.Streetaddress,
-                    City = c.City,
-                    Zipcode = c.Zipcode,
-                    Country = c.Country,
-                    CountryCode = c.CountryCode,
-                    NationalId = c.NationalId,
-                    TelephoneCountryCode = c.TelephoneCountryCode,
-                    Telephone = c.Telephone,
-                    EmailAddress = c.EmailAddress,
-                    Birthday = c.Birthday,
-                })
-                .ToList();
+            {
+                Id = c.Id,
+                Givenname = c.Givenname,
+                Surname = c.Surname,
+                Streetaddress = c.Streetaddress,
+                City = c.City,
+                Zipcode = c.Zipcode,
+                Country = c.Country,
+                CountryCode = c.CountryCode,
+                NationalId = c.NationalId,
+                TelephoneCountryCode = c.TelephoneCountryCode,
+                Telephone = c.Telephone,
+                EmailAddress = c.EmailAddress,
+                Birthday = c.Birthday,
+
+            }).ToList();
         }
     }
 

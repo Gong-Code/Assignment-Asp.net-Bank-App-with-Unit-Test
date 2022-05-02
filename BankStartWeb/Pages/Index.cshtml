@@ -5,26 +5,19 @@
 }
 
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
-    <!-- Pignose Calender -->
-    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
-    <!-- Chartist -->
-    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <link rel="icon" type="/image/png" sizes="16x16" href="/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -35,106 +28,105 @@
         ***********************************-->
         <div class="content-body">
 
-            <div class="container-fluid mt-3">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-1">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">Likes</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">120890</h2>
-                                    <p class="text-white mb-0">Jan - March 2022</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-thumbs-o-up"></i></span>
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-1">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Total Customers</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">@Model.Customers.Count()</h2>
+                                <p class="text-white mb-0">Jan - March 2022</p>
                             </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-3">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">New Customers</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2022</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-3">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Total Accounts</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">@Model.Accounts.Count()</h2>
+                                <p class="text-white mb-0">Jan - March 2022</p>
                             </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-vcard"></i></span>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-2">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">Customer Satisfaction</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">99%</h2>
-                                    <p class="text-white mb-0">Jan - March 2022</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-7">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Current Funds</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">@Model.TotalSum() $</h2>
+                                <p class="text-white mb-0">Jan - March 2022</p>
                             </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                         </div>
                     </div>
+                </div>
                   
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-7">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">Current User</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">63450</h2>
-                                    <p class="text-white mb-0">Feb - April 2022</p>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card gradient-2">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Customer Satisfaction</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">99%</h2>
+                                <p class="text-white mb-0">Feb - April 2022</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body pb-0 d-flex justify-content-between">
+                                    <div>
+                                        <h4 class="mb-1">Bank Funds</h4>
+                                        <p>Total Earnings of the Month</p>
+                                        <h3 style="color: green" class="m-0">$ @Model.TotalSum()</h3>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            <li class="d-inline-block mr-3"><a class="text-dark" href="#">Day</a></li>
+                                            <li class="d-inline-block mr-3"><a class="text-dark" href="#">Week</a></li>
+                                            <li class="d-inline-block"><a class="text-dark" href="#">Month</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-user"></i></span>
+                                <div class="chart-wrapper">
+                                    <canvas id="chart_widget_2"></canvas>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="w-100 mr-2">
+                                            <h6>Loss</h6>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-2 w-100">
+                                            <h6>Gain</h6>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-success" style="width: 80%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body pb-0 d-flex justify-content-between">
-                                        <div>
-                                            <h4 class="mb-1">Net Profit</h4>
-                                            <p>Total Earnings of the Month</p>
-                                            <h3 style="color: green" class="m-0">$ 45,976</h3>
-                                        </div>
-                                        <div>
-                                            <ul>
-                                                <li class="d-inline-block mr-3"><a class="text-dark" href="#">Day</a></li>
-                                                <li class="d-inline-block mr-3"><a class="text-dark" href="#">Week</a></li>
-                                                <li class="d-inline-block"><a class="text-dark" href="#">Month</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <canvas id="chart_widget_2"></canvas>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="w-100 mr-2">
-                                                <h6>Loss</h6>
-                                                <div class="progress" style="height: 6px">
-                                                    <div class="progress-bar bg-danger" style="width: 40%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="ml-2 w-100">
-                                                <h6>Gain</h6>
-                                                <div class="progress" style="height: 6px">
-                                                    <div class="progress-bar bg-success" style="width: 80%"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                
-
-                <div class="row">
+        <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="card">
                                 <div class="card-body">
@@ -148,11 +140,11 @@
                             <div class="card card-widget">
                                 <div class="card-body">
                                     <h5 class="text-muted">Analysis</h5>
-                                    <h2 class="mt-4">5680</h2>
-                                    <span>Total Revenue</span>
+                                    <h2 class="mt-4">@Model.TotalSum() $</h2>
+                                    <span>Total Funds</span>
                                     <div class="mt-4">
                                         <h4>30</h4>
-                                        <h6>Earnings Estimate <span class="pull-right">30%</span></h6>
+                                        <h6>Funds Estimate <span class="pull-right">30%</span></h6>
                                         <div class="progress mb-3" style="height: 7px">
                                             <div class="progress-bar bg-primary" style="width: 30%;" role="progressbar"><span class="sr-only">30% Order</span>
                                             </div>
@@ -160,7 +152,7 @@
                                     </div>
                                     <div class="mt-4">
                                         <h4>50</h4>
-                                        <h6 class="m-t-10 text-muted">Revenue Estimate <span class="pull-right">50%</span></h6>
+                                        <h6 class="m-t-10 text-muted">Bank Fees <span class="pull-right">50%</span></h6>
                                         <div class="progress mb-3" style="height: 7px">
                                             <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span class="sr-only">50% Order</span>
                                             </div>
@@ -168,7 +160,7 @@
                                     </div>
                                     <div class="mt-4">
                                         <h4>20</h4>
-                                        <h6 class="m-t-10 text-muted">Growth Estimates <span class="pull-right">20%</span></h6>
+                                        <h6 class="m-t-10 text-muted">Interest rate <span class="pull-right">20%</span></h6>
                                         <div class="progress mb-3" style="height: 7px">
                                             <div class="progress-bar bg-warning" style="width: 20%;" role="progressbar"><span class="sr-only">20% Order</span>
                                             </div>
@@ -635,13 +627,16 @@
     <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
     <!--  flot-chart js -->
-    <script src="favicon.ico/plugins/flot/js/jquery.flot.min.js"></script>
-    <script src="favicon.ico/plugins/flot/js/jquery.flot.pie.js"></script>
-    <script src="favicon.ico/plugins/flot/js/jquery.flot.resize.js"></script>
-    <script src="favicon.ico/plugins/flot/js/jquery.flot.spline.js"></script>
-    <script src="favicon.ico/plugins/flot/js/jquery.flot.init.js"></script>
+    <script src="/plugins/flot/js/jquery.flot.min.js"></script>
+    <script src="/plugins/flot/js/jquery.flot.pie.js"></script>
+    <script src="/plugins/flot/js/jquery.flot.resize.js"></script>
+    <script src="/plugins/flot/js/jquery.flot.spline.js"></script>
+    <script src="/plugins/flot/js/jquery.flot.init.js"></script>
+    
 
-    <script src="./js/dashboard/dashboard-1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script src="./js/dashboard/dashboard-1.js"></script>
 
 </body>
 
