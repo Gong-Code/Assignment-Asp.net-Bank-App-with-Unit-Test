@@ -53,7 +53,7 @@ namespace BankStartWeb.Pages.AccountManager
                 NewBalance = e.NewBalance
             }).ToList();
 
-            bool lastPage = pageNum == r.PageCount;
+            var lastPage = pageNum == r.PageCount;
 
             return new JsonResult(new { items = list, lastPage = lastPage });
         }
