@@ -28,7 +28,7 @@ namespace BankWebTest.Services
             // Arrange
             _context.Accounts.Add(new Account
             {
-                Balance = 1000,
+                Balance = 10,
                 AccountType = "Personal",
                 Created = DateTime.Now,
                 Transactions = new List<Transaction>()
@@ -55,52 +55,13 @@ namespace BankWebTest.Services
             // Act
             _context.SaveChanges();
 
-            var result = _sut.MakeDeposit(1, - 1000);
+            var result = _sut.MakeDeposit(1,  -1000);
 
             // Assert
             Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
 
         }
 
-        [TestMethod]
-        public void When_deposit_balance_is_to_low_should_return_ok()
-        {
-            // Arrange
-            _context.Accounts.Add(new Account
-            {
-                Balance = 1000,
-                AccountType = "Personal",
-                Created = DateTime.Now,
-                Transactions = new List<Transaction>()
-            });
-
-            _context.Customers.Add(new Customer
-            {
-                Givenname = "Arnold",
-                Surname = "Swats",
-                Streetaddress = "Proteinroad 21b",
-                Zipcode = "765 32",
-                City = "Uppsala",
-                Country = "Sweden",
-                CountryCode = "SE",
-                NationalId = "nationalTest",
-                TelephoneCountryCode = 45,
-                Telephone = "5646456234",
-                EmailAddress = "arnold.swats@gmail.com",
-                Birthday = DateTime.Now,
-                Accounts = new List<Account>()
-
-            });
-
-            // Act
-            _context.SaveChanges();
-
-            var result = _sut.MakeDeposit(1, 3000);
-
-            // Assert
-            Assert.AreEqual(IAccountService.ErrorCode.BalanceIsToLow, result);
-
-        }
 
         [TestMethod]
         public void When_withdrawal_is_to_low_amount_should_return_ok()

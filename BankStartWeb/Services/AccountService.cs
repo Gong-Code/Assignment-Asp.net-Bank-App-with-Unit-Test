@@ -14,7 +14,7 @@ namespace BankStartWeb.Services
 
         public IAccountService.ErrorCode MakeDeposit(int accountId, decimal amount)
         {
-            if (amount < 0)
+            if (amount <= 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
@@ -22,11 +22,6 @@ namespace BankStartWeb.Services
             var account = _context.Accounts
                 .Include(a => a.Transactions)
                 .First(a => a.Id == accountId);
-
-            if (account.Balance < amount)
-            {
-                return IAccountService.ErrorCode.BalanceIsToLow;
-            }
 
             account.Balance += amount;
 
@@ -57,7 +52,7 @@ namespace BankStartWeb.Services
                 return IAccountService.ErrorCode.BalanceIsToLow;
             }
 
-            if (amount < 0)
+            if (amount <= 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
@@ -87,14 +82,20 @@ namespace BankStartWeb.Services
 
         public IAccountService.ErrorCode Transfer(int thisAccountId, int receiverAccountId, decimal amount)
         {
+            var senderAccount = _context.Accounts
+                .Include(s => s.Transactions)
+                .First(a => a.Id == thisAccountId);
+
+            if (amount > senderAccount.Balance)
+            {
+                return IAccountService.ErrorCode.InSufficientFunds;
+            }
+
             if (amount < 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
 
-            var senderAccount = _context.Accounts
-                .Include(s => s.Transactions)
-                .First(a => a.Id == thisAccountId);
 
             var receiverAccount = _context.Accounts
                 .Include(s => s.Transactions)
@@ -109,10 +110,6 @@ namespace BankStartWeb.Services
                 sender.NewBalance = senderAccount.Balance - amount;
             }
 
-            if (amount > senderAccount.Balance)
-            {
-                return IAccountService.ErrorCode.InSufficientFunds;
-            }
 
             var receiver = new Transaction();
             {

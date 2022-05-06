@@ -21,8 +21,8 @@ namespace BankStartWeb.Pages.AccountManager
             _accountService = accountService;
         }
 
-        public int AccountId { get; set; }
-        public int CustomerId { get; set; }
+        [BindProperty] public int AccountId { get; set; }
+        [BindProperty]public int CustomerId { get; set; }
         [BindProperty] public decimal Amount { get; set; }
         public string Operation { get; set; }
         public Account Account { get; set; }

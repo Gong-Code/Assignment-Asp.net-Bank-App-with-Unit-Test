@@ -20,16 +20,17 @@ namespace BankStartWeb.Pages.AccountManager
             _accountService = accountService;
         }
 
-        [BindProperty] public int AccountId { get; set; }
-        [BindProperty] public int TransferId { get; set; }
+        [BindProperty] public int AccountOne { get; set; }
+        [BindProperty] public int AccountTwo { get; set; }
         public int CustomerId { get; set; }
         public string Operation { get; set; }
         [BindProperty]public decimal Amount { get; set; }
         public Customer Customer { get; set; }
         public List<Account> Accounts { get; set; }
-        
 
-        public void OnGet(int accountId, int customerId)
+        public List<SelectListItem> AllAccounts { get; set; }
+
+        public void OnGet( int customerId)
         {
             Customer = _context.Customers
                 .Include(a => a.Accounts)
@@ -41,23 +42,44 @@ namespace BankStartWeb.Pages.AccountManager
 
             }).ToList();
 
-            AccountId = accountId;
             CustomerId = customerId;
+            SetAllAccounts();
 
         }
 
-        public IActionResult OnPost(int accountId, int customerId)
+        public void SetAllAccounts()
         {
+            var customer = _context.Customers
+                .Include(a => a.Accounts)
+                .First(c => c.Id == CustomerId);
+
+            AllAccounts = customer.Accounts.Select(a => new SelectListItem
+            {
+                Text = a.AccountType + " " + a.Balance + " $",
+                Value = a.Id.ToString()
+
+            }).ToList();
+        }
+
+        
+
+
+        public IActionResult OnPost(int customerId)
+        {
+            int accountOne = AccountOne;
+            int accountTwo = AccountTwo;
+            decimal amount = Amount;
             if (ModelState.IsValid)
             {
                 Customer = _context.Customers.First(c => c.Id == customerId);
-                var status = _accountService.Transfer(accountId, TransferId, Amount);
+                var status = _accountService.Transfer(accountOne, accountTwo, amount);
                 
                 if (status == IAccountService.ErrorCode.InSufficientFunds)
                 {
                     ModelState.AddModelError(nameof(Amount),
                         "Insufficient funds");
-
+                    
+                    SetAllAccounts();
                     return Page();
                 }
 
@@ -65,14 +87,17 @@ namespace BankStartWeb.Pages.AccountManager
                 {
                     ModelState.AddModelError(nameof(Amount),
                         "You cannot transfer a negative amount.");
-
+                    
+                    SetAllAccounts();
                     return Page();
                 }
+
 
                 return RedirectToPage("/AccountManager/TransactionList", new { customerId });
 
             }
 
+            SetAllAccounts();
             return Page();
         }
     }
