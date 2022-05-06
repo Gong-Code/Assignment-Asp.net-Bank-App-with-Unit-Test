@@ -91,7 +91,7 @@ namespace BankStartWeb.Services
                 return IAccountService.ErrorCode.InSufficientFunds;
             }
 
-            if (amount < 0)
+            if (amount <= 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
             }

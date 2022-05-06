@@ -36,40 +36,33 @@ namespace BankStartWeb.Pages.AccountManager
 
         public IActionResult OnPost(int accountId, int customerId)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return Page();
+            Customer = _context.Customers
+                .First(c => c.Id == customerId);
+
+            Account = _context.Accounts
+                .Include(t => t.Transactions)
+                .First(a => a.Id == accountId);
+
+            var status = _accountService.MakeDeposit(accountId, Amount);
+
+            switch (status)
             {
-                Customer = _context.Customers
-                    .First(c => c.Id == customerId);
-
-                Account = _context.Accounts
-                    .Include(t => t.Transactions)
-                    .First(a => a.Id == accountId);
-
-                var status = _accountService.MakeDeposit(accountId, Amount);
-
-                if (status == IAccountService.ErrorCode.AmountIsNegative)
-                {
+                case IAccountService.ErrorCode.AmountIsNegative:
                     ModelState.AddModelError(nameof(Amount),
                         "Insufficient funds");
 
                     return Page();
-                }
-
-                if (status == IAccountService.ErrorCode.BalanceIsToLow)
-                {
+                case IAccountService.ErrorCode.BalanceIsToLow:
                     ModelState.AddModelError(nameof(Amount),
                         "Your current balance is to low.");
 
                     return Page();
-                }
-
-                if (status == IAccountService.ErrorCode.ok)
-                {
-                    return RedirectToPage("/AccountManager/TransactionList", new { customerId });
-                }
+                case IAccountService.ErrorCode.ok:
+                    return RedirectToPage("/AccountManager/TransactionList", new {customerId});
+                default:
+                    return Page();
             }
-
-            return Page();
         }
     }
 }
