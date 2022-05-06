@@ -66,35 +66,31 @@ namespace BankStartWeb.Pages.AccountManager
 
         public IActionResult OnPost(int customerId)
         {
-            int accountOne = AccountOne;
-            int accountTwo = AccountTwo;
-            decimal amount = Amount;
+            var accountOne = AccountOne;
+            var accountTwo = AccountTwo;
+            var amount = Amount;
             if (ModelState.IsValid)
             {
                 Customer = _context.Customers.First(c => c.Id == customerId);
                 var status = _accountService.Transfer(accountOne, accountTwo, amount);
                 
-                if (status == IAccountService.ErrorCode.InSufficientFunds)
+                switch (status)
                 {
-                    ModelState.AddModelError(nameof(Amount),
-                        "Insufficient funds");
+                    case IAccountService.ErrorCode.InSufficientFunds:
+                        ModelState.AddModelError(nameof(Amount),
+                            "Insufficient funds");
                     
-                    SetAllAccounts();
-                    return Page();
-                }
-
-                if (status == IAccountService.ErrorCode.AmountIsNegative)
-                {
-                    ModelState.AddModelError(nameof(Amount),
-                        "You cannot transfer a negative amount.");
+                        SetAllAccounts();
+                        return Page();
+                    case IAccountService.ErrorCode.AmountIsNegative:
+                        ModelState.AddModelError(nameof(Amount),
+                            "You cannot transfer a negative amount.");
                     
-                    SetAllAccounts();
-                    return Page();
+                        SetAllAccounts();
+                        return Page();
+                    default:
+                        return RedirectToPage("/AccountManager/TransactionList", new { customerId });
                 }
-
-
-                return RedirectToPage("/AccountManager/TransactionList", new { customerId });
-
             }
 
             SetAllAccounts();
