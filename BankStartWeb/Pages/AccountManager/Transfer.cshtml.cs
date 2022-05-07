@@ -26,8 +26,6 @@ namespace BankStartWeb.Pages.AccountManager
         public string Operation { get; set; }
         [BindProperty]public decimal Amount { get; set; }
         public Customer Customer { get; set; }
-        public List<Account> Accounts { get; set; }
-
         public List<SelectListItem> AllAccounts { get; set; }
 
         public void OnGet( int customerId)
@@ -36,15 +34,8 @@ namespace BankStartWeb.Pages.AccountManager
                 .Include(a => a.Accounts)
                 .First(c => c.Id == customerId);
             
-            Accounts = Customer.Accounts.Select(a => new Account
-            {
-                Id = a.Id,
-
-            }).ToList();
-
             CustomerId = customerId;
             SetAllAccounts();
-
         }
 
         public void SetAllAccounts()
@@ -60,9 +51,6 @@ namespace BankStartWeb.Pages.AccountManager
 
             }).ToList();
         }
-
-        
-
 
         public IActionResult OnPost(int customerId)
         {

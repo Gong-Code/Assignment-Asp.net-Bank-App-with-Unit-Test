@@ -131,5 +131,23 @@ namespace BankStartWeb.Services
             return IAccountService.ErrorCode.ok;
 
         }
+
+        public IAccountService.ErrorCode AddAccount(int customerId, string accountType)
+        {
+            var customer = _context.Customers.First(c => c.Id == customerId);
+
+            var account = new Account()
+            {
+                AccountType = accountType,
+                Created = DateTime.Now,
+                Balance = 0
+
+            };
+
+            customer.Accounts.Add(account);
+            _context.SaveChanges();
+
+            return IAccountService.ErrorCode.ok;
+        }
     }
 }

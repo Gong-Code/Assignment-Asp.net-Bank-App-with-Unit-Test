@@ -112,12 +112,18 @@
                                             <a style="color: white" asp-route-id="@Model.Id" asp-route-customerId="@Model.Id" asp-route-accountId="@account.Id" asp-page="/AccountManager/TransactionList">See all Transactions</a>
                                         </button>
                                     </td>
+                                  
                                 </tr>
                             }
                             <tr>
                                 <th>Total Balance</th>
                                 <td style="color: #2dce89">
                                     @Model.TotalBalance$
+                                </td>
+                                <td>
+                                    <button colspan="6" type="button" class="btn mb-1 btn-icon-left btn-google-plus">
+                                        <a style="color: white" asp-route-customerId="@Model.Id" asp-route-accountId="@Model.Id" asp-page="/CustomerManager/AddAccount">Add Account</a>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>

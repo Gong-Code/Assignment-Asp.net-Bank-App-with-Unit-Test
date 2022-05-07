@@ -41,7 +41,7 @@ namespace BankStartWeb.Pages.AccountManager
                 .SelectMany(e => e.Transactions)
                 .OrderByDescending(e => e.Date);
 
-            var r = query.GetPaged(pageNum, 5);
+            var r = query.GetPaged(pageNum, 20);
 
             var list = r.Results.Select(e => new TransactionViewModel
             {

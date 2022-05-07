@@ -54,18 +54,22 @@ namespace BankStartWeb.Pages.AccountManager
                         "Insufficient funds");
 
                     return Page();
+                
                 case IAccountService.ErrorCode.AmountIsNegative:
                     ModelState.AddModelError(nameof(Amount),
                         "Cannot withdraw negative amounts.");
 
                     return Page();
+                
                 case IAccountService.ErrorCode.BalanceIsToLow:
                     ModelState.AddModelError(nameof(Amount),
                         "Your current balance is to low.");
 
                     return Page();
+                
                 case IAccountService.ErrorCode.ok:
                     return RedirectToPage("/AccountManager/TransactionList", new { customerId });
+                
                 default:
                     return Page();
             }
