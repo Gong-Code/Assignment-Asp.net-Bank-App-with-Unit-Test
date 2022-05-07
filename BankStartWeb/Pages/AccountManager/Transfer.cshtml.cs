@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using BankStartWeb.Data;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -13,15 +14,17 @@ namespace BankStartWeb.Pages.AccountManager
     {
         private readonly ApplicationDbContext _context;
         private readonly IAccountService _accountService;
+        private readonly INotyfService _notyfService;
 
-        public TransferModel(ApplicationDbContext context, IAccountService accountService)
+        public TransferModel(ApplicationDbContext context, IAccountService accountService, INotyfService notyfService)
         {
             _context = context;
             _accountService = accountService;
+            _notyfService = notyfService;
         }
 
-        [BindProperty] public int AccountOne { get; set; }
-        [BindProperty] public int AccountTwo { get; set; }
+        [BindProperty] public int FromAccount { get; set; }
+        [BindProperty] public int ToAccount { get; set; }
         public int CustomerId { get; set; }
         public string Operation { get; set; }
         [BindProperty]public decimal Amount { get; set; }
@@ -54,34 +57,39 @@ namespace BankStartWeb.Pages.AccountManager
 
         public IActionResult OnPost(int customerId)
         {
-            var accountOne = AccountOne;
-            var accountTwo = AccountTwo;
+            var fromAccount = FromAccount;
+            var toAccount = ToAccount;
             var amount = Amount;
             if (ModelState.IsValid)
             {
                 Customer = _context.Customers.First(c => c.Id == customerId);
-                var status = _accountService.Transfer(accountOne, accountTwo, amount);
-                
+
+                var status = _accountService.Transfer(fromAccount, toAccount, amount);
+
                 switch (status)
                 {
                     case IAccountService.ErrorCode.InSufficientFunds:
                         ModelState.AddModelError(nameof(Amount),
                             "Insufficient funds");
-                    
+
                         SetAllAccounts();
                         return Page();
                     case IAccountService.ErrorCode.AmountIsNegative:
                         ModelState.AddModelError(nameof(Amount),
                             "You cannot transfer a negative amount.");
-                    
+
+
                         SetAllAccounts();
                         return Page();
                     default:
-                        return RedirectToPage("/AccountManager/TransactionList", new { customerId });
+                        _notyfService.Success("Successful Transfer!");
+
+                        return RedirectToPage("/AccountManager/TransactionList", new {customerId});
                 }
             }
 
             SetAllAccounts();
+
             return Page();
         }
     }

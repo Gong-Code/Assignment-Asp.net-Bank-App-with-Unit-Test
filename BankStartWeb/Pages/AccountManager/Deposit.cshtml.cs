@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using BankStartWeb.Data;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -12,13 +13,14 @@ namespace BankStartWeb.Pages.AccountManager
     public class DepositModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-
         private readonly IAccountService _accountService;
-       
-        public DepositModel(ApplicationDbContext context, IAccountService accountService)
+        private readonly INotyfService _notyfService;
+
+        public DepositModel(ApplicationDbContext context, IAccountService accountService, INotyfService notyfService)
         {
             _context = context;
             _accountService = accountService;
+            _notyfService = notyfService;
         }
 
         [BindProperty] public int AccountId { get; set; }
@@ -46,6 +48,8 @@ namespace BankStartWeb.Pages.AccountManager
 
             var status = _accountService.MakeDeposit(accountId, Amount);
 
+            _notyfService.Success("Success!");
+
             switch (status)
             {
                 case IAccountService.ErrorCode.AmountIsNegative:
@@ -53,16 +57,13 @@ namespace BankStartWeb.Pages.AccountManager
                         "Insufficient funds");
 
                     return Page();
-                
                 case IAccountService.ErrorCode.BalanceIsToLow:
                     ModelState.AddModelError(nameof(Amount),
                         "Your current balance is to low.");
 
                     return Page();
-               
                 case IAccountService.ErrorCode.ok:
                     return RedirectToPage("/AccountManager/TransactionList", new {customerId});
-                
                 default:
                     return Page();
             }

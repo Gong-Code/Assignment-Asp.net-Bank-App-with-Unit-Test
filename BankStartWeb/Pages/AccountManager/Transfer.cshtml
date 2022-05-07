@@ -11,14 +11,14 @@
                 <form method="post">
                     
                     <div class="form-group">
-                        <label class="d-flex" asp-for="AccountOne">From Account</label>
-                        <select asp-for="AccountOne" asp-items="@Model.AllAccounts" class="form-group"></select>
-                        <span class="text-danger d-block" asp-validation-for="AccountOne"></span>
+                        <label class="d-flex" asp-for="FromAccount">From Account</label>
+                        <select asp-for="FromAccount" asp-items="@Model.AllAccounts" class="form-group"></select>
+                        <span class="text-danger d-block" asp-validation-for="FromAccount"></span>
                     </div>
                     <div class="form-group">
-                        <label class="d-flex" asp-for="AccountTwo">To Account</label>
-                        <select asp-for="AccountTwo" asp-items="@Model.AllAccounts" class="form-group"></select>
-                        <span class="text-danger d-block" asp-validation-for="AccountTwo"></span>
+                        <label class="d-flex" asp-for="ToAccount">To Account</label>
+                        <select asp-for="ToAccount" asp-items="@Model.AllAccounts" class="form-group"></select>
+                        <span class="text-danger d-block" asp-validation-for="ToAccount"></span>
                     </div>
                     <div class="form-group">
                         <label class="d-flex" asp-for="Amount">Amount</label>
