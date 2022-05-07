@@ -58,7 +58,6 @@ namespace BankStartWeb.Pages.CustomerManager
             SetAllCountries();
         }
 
-
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
