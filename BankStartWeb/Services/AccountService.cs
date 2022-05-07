@@ -80,11 +80,11 @@ namespace BankStartWeb.Services
             return IAccountService.ErrorCode.ok;
         }
 
-        public IAccountService.ErrorCode Transfer(int thisAccountId, int receiverAccountId, decimal amount)
+        public IAccountService.ErrorCode Transfer(int fromAccountId, int toAccountId, decimal amount)
         {
             var senderAccount = _context.Accounts
                 .Include(s => s.Transactions)
-                .First(a => a.Id == thisAccountId);
+                .First(a => a.Id == fromAccountId);
 
             if (amount > senderAccount.Balance)
             {
@@ -99,7 +99,7 @@ namespace BankStartWeb.Services
 
             var receiverAccount = _context.Accounts
                 .Include(s => s.Transactions)
-                .First(a => a.Id == receiverAccountId);
+                .First(a => a.Id == toAccountId);
 
             var sender = new Transaction();
             {
