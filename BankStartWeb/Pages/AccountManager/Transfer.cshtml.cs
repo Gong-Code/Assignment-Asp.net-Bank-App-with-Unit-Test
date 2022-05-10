@@ -26,7 +26,6 @@ namespace BankStartWeb.Pages.AccountManager
         [BindProperty] public int FromAccount { get; set; }
         [BindProperty] public int ToAccount { get; set; }
         public int CustomerId { get; set; }
-        public string Operation { get; set; }
         [BindProperty]public decimal Amount { get; set; }
         public Customer Customer { get; set; }
         public List<SelectListItem> AllAccounts { get; set; }
@@ -82,7 +81,7 @@ namespace BankStartWeb.Pages.AccountManager
                         SetAllAccounts();
                         return Page();
                     default:
-                        _notyfService.Success("Successful Transfer!");
+                        _notyfService.Success("Transfer Complete!");
 
                         return RedirectToPage("/AccountManager/TransactionList", new {customerId});
                 }

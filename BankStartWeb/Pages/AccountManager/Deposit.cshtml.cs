@@ -26,7 +26,6 @@ namespace BankStartWeb.Pages.AccountManager
         [BindProperty] public int AccountId { get; set; }
         [BindProperty]public int CustomerId { get; set; }
         [BindProperty] public decimal Amount { get; set; }
-        public string Operation { get; set; }
         public Account Account { get; set; }
         public Customer Customer { get; set; }
 
@@ -48,7 +47,7 @@ namespace BankStartWeb.Pages.AccountManager
 
             var status = _accountService.MakeDeposit(accountId, Amount);
 
-            _notyfService.Success("Success!");
+            _notyfService.Success("Deposit Complete!");
 
             switch (status)
             {
