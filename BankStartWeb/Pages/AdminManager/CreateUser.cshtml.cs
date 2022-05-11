@@ -71,7 +71,6 @@ namespace BankStartWeb.Pages.AdminManager
                     Text = "Admin"
                 }
             };
-
         }
     }
 }
