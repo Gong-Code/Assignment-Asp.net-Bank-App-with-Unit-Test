@@ -19,11 +19,7 @@ namespace BankStartWeb.Pages
 
         public decimal TotalSum()
         {
-            decimal total = 0;
-            foreach (var account in Accounts)
-            {
-                total += account.Balance;
-            }
+            decimal total = Accounts.Sum(account => account.Balance);
 
             return Math.Round(total);
         }
