@@ -63,7 +63,7 @@ namespace BankStartWeb.Pages.CustomerManager
             search = search.OrderBy(col,
                 order == "asc" ? ExtensionMethods.QuerySortOrder.Asc : ExtensionMethods.QuerySortOrder.Desc);
 
-            var pageResult = search.GetPaged(PageNum, 20);
+            var pageResult = search.GetPaged(PageNum, 50);
             TotalPageCount = pageResult.PageCount;
 
             Customers = pageResult.Results.Select(c => new CustomerViewModel
