@@ -1,12 +1,14 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
 using BankStartWeb.Data;
 using BankStartWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankStartWeb.Pages.CustomerManager
 {
+    [Authorize(Roles = "Admin, Cashier")]
     public class AddAccountModel : PageModel
     {
         private readonly ApplicationDbContext _context;

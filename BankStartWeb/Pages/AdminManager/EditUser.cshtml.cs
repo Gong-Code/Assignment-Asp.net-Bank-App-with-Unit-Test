@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankStartWeb.Pages.AdminManager
 {
-    [BindProperties]
     [Authorize(Roles = "Admin")]
+    [BindProperties]
     public class EditUserModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
