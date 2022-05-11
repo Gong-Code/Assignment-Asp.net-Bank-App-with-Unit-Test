@@ -58,7 +58,7 @@ namespace BankStartWeb.Pages.CustomerManager
             int.TryParse(SearchWord, out var searchId);
             if (!string.IsNullOrEmpty(SearchWord))
                 search = search.Where(s =>
-                    s.Givenname.Contains(SearchWord) || s.Givenname.Contains(SearchWord) || s.Id.Equals(searchId));
+                    s.Givenname.Contains(SearchWord) || s.City.Contains(SearchWord) || s.Id.Equals(searchId));
 
             search = search.OrderBy(col,
                 order == "asc" ? ExtensionMethods.QuerySortOrder.Asc : ExtensionMethods.QuerySortOrder.Desc);
