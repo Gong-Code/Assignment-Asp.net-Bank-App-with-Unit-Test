@@ -3,36 +3,47 @@
 @{
 }
 
-<div class="container mt-5 bg-white">
-    <h1 class="py-3">System Users</h1>
-    <table class="table">
-        <div class="container2">
-            <tr class="col-span-2">
-                <th>Id</th>
-                <th>Email Address</th>
-                <th>UserName</th>
-                <th>Roles</th>
-                <th>Edit user</th>
-            </tr>
-            @foreach (var user in Model.Users)
-            {
-                <tr>
-                    <td>@user.Id</td>
-                    <td>@user.Email</td>
-                    <td>@user.UserName</td>
-                    <td>
-                        @foreach (var role in user.UserRoles)
-                        {
-                            @(role != user.UserRoles.First() ? ", " : " ")@role
+<div class="col-lg-10">
+    <div class="card">
+        <div class="card-body">
+            <div card="card-title">
+                <h2 style="color: cornflowerblue">All Users</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr style="color: blueviolet">
+                        <th>Id</th>
+                        <th>Email Address</th>
+                        <th>UserName</th>
+                        <th>Roles</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserName</td>
+                            <td>
+                                @foreach (var role in user.UserRoles)
+                                {
+                                    @(role != user.UserRoles.First() ? ", " : " ")@role
 
-                        }
-                    </td>
-                    <td>
-                        <a asp-page="/AdminManager/EditUser" asp-route-userId="@user.Id">Edit</a>
-                    </td>
-                </tr>
-            }
+                                }
+                            </td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <a style="color: white" asp-page="/AdminManager/EditUser" asp-route-userId="@user.Id">Edit</a>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </table>
-    <a class="btn btn-primary btn-round" asp-page="/AdminManager/CreateUser">Add new User</a>
+    </div>
 </div>
+
