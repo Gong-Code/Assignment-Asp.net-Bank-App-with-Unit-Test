@@ -27,15 +27,10 @@ namespace BankStartWeb.Pages.AccountManager
         [BindProperty] public int ToAccount { get; set; }
         public int CustomerId { get; set; }
         [BindProperty]public decimal Amount { get; set; }
-        public Customer Customer { get; set; }
         public List<SelectListItem> AllAccounts { get; set; }
 
         public void OnGet( int customerId)
         {
-            Customer = _context.Customers
-                .Include(a => a.Accounts)
-                .First(c => c.Id == customerId);
-            
             CustomerId = customerId;
             SetAllAccounts();
         }
@@ -54,16 +49,13 @@ namespace BankStartWeb.Pages.AccountManager
             }).ToList();
         }
 
-        public IActionResult OnPost(int customerId)
+        public IActionResult OnPost(int customerId, int accountId)
         {
-            var fromAccount = FromAccount;
-            var toAccount = ToAccount;
-            var amount = Amount;
+            
             if (ModelState.IsValid)
             {
-                Customer = _context.Customers.First(c => c.Id == customerId);
-
-                var status = _accountService.Transfer(fromAccount, toAccount, amount);
+                
+                var status = _accountService.Transfer(FromAccount, ToAccount, Amount);
 
                 switch (status)
                 {
@@ -83,7 +75,7 @@ namespace BankStartWeb.Pages.AccountManager
                     default:
                         _notyfService.Success("Transfer Complete!");
 
-                        return RedirectToPage("/AccountManager/TransactionList", new {customerId});
+                        return RedirectToPage("/AccountManager/TransactionList", new {customerId = FromAccount});
                 }
             }
 

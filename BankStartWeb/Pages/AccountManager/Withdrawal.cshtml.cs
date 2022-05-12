@@ -27,8 +27,6 @@ namespace BankStartWeb.Pages.AccountManager
         [BindProperty] public int AccountId { get; set; }
         [BindProperty] public int CustomerId { get; set; }
         [BindProperty] public decimal Amount { get; set; }
-        public Account Account { get; set; }
-        public Customer Customer { get; set; }
         
 
         public void OnGet(int accountId, int customerId)
@@ -40,13 +38,7 @@ namespace BankStartWeb.Pages.AccountManager
         public IActionResult OnPost(int accountId, int customerId)
         {
             if (!ModelState.IsValid) return Page();
-            Customer = _context.Customers
-                .First(c => c.Id == customerId);
-                
-            Account = _context.Accounts
-                .Include(t => t.Transactions)
-                .First(a => a.Id == accountId);
-                
+            
             var status = _accountService.MakeWithdrawal(accountId, Amount);
 
             _notyfService.Success("Withdrawal Complete!");
@@ -72,7 +64,7 @@ namespace BankStartWeb.Pages.AccountManager
                     return Page();
                 
                 case IAccountService.ErrorCode.ok:
-                    return RedirectToPage("/AccountManager/TransactionList", new { customerId });
+                    return RedirectToPage("/AccountManager/TransactionList", new { customerId = accountId });
                 
                 default:
 
@@ -80,4 +72,6 @@ namespace BankStartWeb.Pages.AccountManager
             }
         }
     }
+
+    
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BankStartWeb.Pages.CustomerManager
 {
     [Authorize(Roles = "Admin, Cashier")]
+    [BindProperties]
     public class DetailModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -30,10 +31,18 @@ namespace BankStartWeb.Pages.CustomerManager
         public string Telephone { get; set; }
         [MaxLength(50)] public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
-        public List<Account> Accounts { get; set; }
 
+        public List<AccountViewModel> Accounts { get; set; }
         public decimal TotalBalance { get; set; }
- 
+        public class AccountViewModel
+        {
+            public int AccountId { get; set; }
+            public string AccountType { get; set; }
+            public DateTime Created { get; set; }
+            public decimal Balance { get; set; }
+            
+        }
+
         public void OnGet(int id)
         {
             var accountInfo = _context.Customers
@@ -54,14 +63,19 @@ namespace BankStartWeb.Pages.CustomerManager
             Telephone = accountInfo.Telephone;
             EmailAddress = accountInfo.EmailAddress;
             Birthday = accountInfo.Birthday;
-            Accounts = accountInfo.Accounts;
 
-            TotalBalance = 0;
-
-            foreach (var account in Accounts)
+            Accounts = accountInfo.Accounts.Select(account => new AccountViewModel
             {
-                TotalBalance += account.Balance;
-            }
+                AccountId = account.Id,
+                AccountType = account.AccountType,
+                Created = account.Created,
+                Balance = account.Balance,
+
+            }).ToList();
+
+            TotalBalance = Accounts.Sum(s => s.Balance);
+
+
         }
     }
 }

@@ -20,7 +20,6 @@ namespace BankStartWeb.Pages.AccountManager
         public string AccountType { get; set; }
         public DateTime Created { get; set; }
         public decimal Balance { get; set; }
-        public List<Transaction> Transactions { get; set; }
         public class TransactionViewModel
         {
             public int Id { get; set; }
@@ -60,18 +59,10 @@ namespace BankStartWeb.Pages.AccountManager
 
         public void OnGet(int customerId)
         {
-            var customer = _context.Customers
-                .Include(c => c.Accounts)
-                .ThenInclude(c => c.Transactions.OrderByDescending(c => c.Date))
-                .First(c => c.Accounts.Any(a => a.Id == customerId));
-
             var account = _context.Accounts.First(a => a.Id == customerId);
-
             Id = customerId;
-            AccountType = account.AccountType;
-            Created = account.Created;
             Balance = account.Balance;
-            Transactions = account.Transactions;
+           
         }
     }
 

@@ -94,22 +94,22 @@
                                     <td style="color: #11cdef">@account.Created</td>
                                     <td>
                                         <button type="button" class="btn mb-1 btn-success" >
-                                            <a style="color: white" asp-route-accountId="@account.Id" asp-route-customerId="@Model.Id" asp-page="/AccountManager/Deposit">Deposit</a>
+                                            <a style="color: white" asp-route-accountId="@account.AccountId" asp-route-customerId="@Model.Id" asp-page="/AccountManager/Deposit">Deposit</a>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn mb-1 btn-danger" >
-                                            <a style="color: white" asp-route-accountId="@account.Id" asp-route-customerId="@Model.Id" asp-page="/AccountManager/Withdrawal">Withdrawal</a>
+                                            <a style="color: white" asp-route-accountId="@account.AccountId" asp-route-customerId="@Model.Id" asp-page="/AccountManager/Withdrawal">Withdrawal</a>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn mb-1 btn-warning" >
-                                            <a style="color: white" asp-route-customerId="@Model.Id" asp-route-accountId="@account.Id" asp-page="/AccountManager/Transfer">Transfer</a>
+                                            <a style="color: white" asp-route-customerId="@Model.Id" asp-route-accountId="@account.AccountId" asp-page="/AccountManager/Transfer">Transfer</a>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn mb-1 btn-primary" >
-                                            <a style="color: white" asp-route-id="@Model.Id" asp-route-customerId="@Model.Id" asp-route-accountId="@account.Id" asp-page="/AccountManager/TransactionList">See all Transactions</a>
+                                            <a style="color: white" asp-route-id="@Model.Id" asp-route-customerId="@Model.Id" asp-route-accountId="@account.AccountId" asp-page="/AccountManager/TransactionList">See all Transactions</a>
                                         </button>
                                     </td>
                                   

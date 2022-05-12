@@ -14,25 +14,17 @@ namespace BankStartWeb.Pages
             _context = context;
         }
 
-        public List<Customer> Customers { get; set; }
-        public List<Account> Accounts { get; set; }
-
-        public decimal TotalSum()
-        {
-            decimal total = Accounts.Sum(account => account.Balance);
-
-            return Math.Round(total);
-        }
+        public int AccountCount { get; set; }
+        public int CustomersCount { get; set; }
+        public decimal TotalBalance { get; set; }
 
         public void OnGet()
         {
-            Customers = _context.Customers.Select(c => new Customer()).ToList();
-
-            Accounts = _context.Accounts.Select(a => new Account
-            {
-                Balance = a.Balance
-
-            }).ToList();
+            CustomersCount = _context.Customers.Count();
+            AccountCount = _context.Accounts.Count();
+            TotalBalance = _context.Accounts.Sum(s => s.Balance);
         }
+
+        
     }
 }

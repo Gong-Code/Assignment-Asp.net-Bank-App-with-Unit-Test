@@ -42,7 +42,7 @@ namespace BankStartWeb.Pages.CustomerManager
             [MaxLength(50)] public string EmailAddress { get; set; }
 
             public DateTime Birthday { get; set; }
-            public List<Account> Accounts { get; set; } = new();
+            
         }
 
         public void OnGet(string searchWord, string col = "Id", string order = "asc", int pageNum = 1)
