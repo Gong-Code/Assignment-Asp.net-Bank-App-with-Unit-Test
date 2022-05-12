@@ -18,12 +18,12 @@ public class DataInitializer
     }
 
 
-    public void SeedData()
+    public async Task SeedData()
     {
         _dbContext.Database.Migrate();
         SeedCustomers();
         SeedRoles();
-        SeedUsers();
+        await SeedUsers();
     }
 
     private async Task SeedUsers()
@@ -48,7 +48,7 @@ public class DataInitializer
         };
 
         await _userManager.CreateAsync(user, password);
-        await _userManager.AddToRolesAsync(user, roles);
+        await _userManager.AddToRolesAsync(await _userManager.FindByEmailAsync(email), roles);
 
     }
 
