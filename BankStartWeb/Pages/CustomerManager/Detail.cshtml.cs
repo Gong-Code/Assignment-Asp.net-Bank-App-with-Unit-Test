@@ -49,7 +49,6 @@ namespace BankStartWeb.Pages.CustomerManager
                 .Include(c => c.Accounts)
                 .First(customer => customer.Id == id);
 
-
             Id = accountInfo.Id;
             Givenname = accountInfo.Givenname;
             Surname = accountInfo.Surname;
@@ -74,7 +73,6 @@ namespace BankStartWeb.Pages.CustomerManager
             }).ToList();
 
             TotalBalance = Accounts.Sum(s => s.Balance);
-
 
         }
     }
